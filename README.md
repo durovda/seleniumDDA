@@ -1,2 +1,2 @@
-# seleniumDDA
+# seleniumDDA (Dmitry Durov)
 test-selenium
