@@ -13,6 +13,7 @@ class MyTestCase(unittest.TestCase):
         self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.driver, 10)  # seconds
         self.driver.get("http://localhost/litecart/en/")
+        # self.driver.implicitly_wait(1)  # seconds
 
     def tearDown(self):
         self.driver.quit()
@@ -52,6 +53,8 @@ class MyTestCase(unittest.TestCase):
     def select_zone(self):
         xpath_option_ak = """//select[contains(@name, 'zone_code')]//option[contains(@value, 'AK')]"""
         self.wait.until(EC.presence_of_element_located((By.XPATH, xpath_option_ak)))
+        # self.wait.until(lambda d: d.find_element_by_xpath(xpath_option_ak))   # Альтернативный вариант
+        # self.driver.find_element_by_xpath(xpath_option_ak)    # Вариант работает, если implicitly_wait > 0
         xpath_combo = """//select[contains(@name, "zone_code")]"""
         combo = self.driver.find_element_by_xpath(xpath_combo)
         Select(combo).select_by_value("AK")
