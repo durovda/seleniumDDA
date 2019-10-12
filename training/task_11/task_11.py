@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from datetime import datetime
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import time
 
 
@@ -33,9 +34,7 @@ class MyTestCase(unittest.TestCase):
         self.fill_input_box("password", self.prefix)
         self.fill_input_box("confirmed_password", self.prefix)
         self.select_country()
-        time.sleep(1)
         self.select_zone()
-        time.sleep(1)
         xpath_btn = """//button[contains(@name, "create_account")]"""
         self.driver.find_element_by_xpath(xpath_btn).click()
 
@@ -51,6 +50,8 @@ class MyTestCase(unittest.TestCase):
         Select(combo).select_by_value("US")
 
     def select_zone(self):
+        xpath_option_ak = """//select[contains(@name, 'zone_code')]//option[contains(@value, 'AK')]"""
+        self.wait.until(EC.presence_of_element_located((By.XPATH, xpath_option_ak)))
         xpath_combo = """//select[contains(@name, "zone_code")]"""
         combo = self.driver.find_element_by_xpath(xpath_combo)
         Select(combo).select_by_value("AK")
