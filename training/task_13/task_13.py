@@ -58,7 +58,7 @@ class MyTestCase(unittest.TestCase):
 
     def additional_actions(self):
         xpath = """//select[contains(@name, 'options[Size]')]"""
-        is_different_size = len(self.driver.find_elements_by_xpath(xpath))
+        is_different_size = len(self.driver.find_elements_by_xpath(xpath)) > 0
         if is_different_size:
             combo = self.driver.find_element_by_xpath(xpath)
             Select(combo).select_by_value("Small")
