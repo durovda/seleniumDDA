@@ -9,12 +9,12 @@ class CartPage:
         self._wait = self._session.get_wait()
 
     def clean(self):
-        item_count = self._get_item_count()
+        item_count = self._get_items_count()
         for _ in range(item_count):
             self._remove_any_item()
         self._wait_cart_cleaned()
 
-    def _get_item_count(self):
+    def _get_items_count(self):
         xpath_remove_item_button = """//button[contains(@name, 'remove_cart_item')]"""
         return len(self._driver.find_elements_by_xpath(xpath_remove_item_button))
 
